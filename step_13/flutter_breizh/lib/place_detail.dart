@@ -1,6 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_breizh/data/place.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class PlaceDetailPage extends StatelessWidget {
   PlaceDetailPage({
@@ -18,35 +18,11 @@ class PlaceDetailPage extends StatelessWidget {
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
-            title: Text(
-              place.title,
-              style: textTheme.title.copyWith(color: Colors.white),
-            ),
-            pinned: true,
-            expandedHeight: 256,
-            flexibleSpace: FlexibleSpaceBar(
-              background: Stack(
-                fit: StackFit.expand,
-                children: <Widget>[
-                  CachedNetworkImage(
-                    placeholder: Container(
-                      color: Colors.black12,
-                    ),
-                    imageUrl: place.pictures[0],
-                    fit: BoxFit.cover,
-                  ),
-                  // This gradient ensures that the toolbar icons are distinct
-                  // against the background image.
-                  const DecoratedBox(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment(0.0, -1.0),
-                        end: Alignment(0.0, -0.2),
-                        colors: <Color>[Color(0x60000000), Color(0x00000000)],
-                      ),
-                    ),
-                  ),
-                ],
+            title: Hero(
+              tag: 'title_${place.numid}',
+              child: Text(
+                place.title,
+                style: textTheme.title.copyWith(color: Colors.white),
               ),
             ),
           ),
@@ -66,20 +42,6 @@ class PlaceDetailPage extends StatelessWidget {
                 Text(
                   'Longitude : ${place.longitude}',
                   style: textTheme.subtitle,
-                ),
-                SizedBox(
-                  height: 8,
-                ),
-                AspectRatio(
-                  aspectRatio: 1,
-                  child: CachedNetworkImage(
-                    placeholder: Container(
-                      color: Colors.black12,
-                    ),
-                    imageUrl:
-                        'https://static-maps.yandex.ru/1.x/?lang=en-US&ll=${place.longitude},${place.latitude}&z=13&l=map,sat,skl&size=450,450',
-                    fit: BoxFit.cover,
-                  ),
                 ),
               ],
             ),
@@ -105,12 +67,12 @@ class PlaceDetailPage extends StatelessWidget {
               children: place.pictures
                   .skip(1)
                   .map((picture) => CachedNetworkImage(
-                        placeholder: Container(
-                          color: Colors.black12,
-                        ),
-                        imageUrl: picture,
-                        fit: BoxFit.cover,
-                      ))
+                placeholder: Container(
+                  color: Colors.black12,
+                ),
+                imageUrl: picture,
+                fit: BoxFit.cover,
+              ))
                   .toList(),
             ),
           ),

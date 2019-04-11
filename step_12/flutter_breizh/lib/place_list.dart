@@ -94,26 +94,35 @@ class _PlaceTileState extends State<_PlaceTile> {
       leading: SizedBox(
         width: 100,
         height: 56,
-        child: CachedNetworkImage(
-          placeholder: Container(
-            color: Colors.black12,
+        child: Hero(
+          tag: 'image_${widget.place.numid}',
+          child: CachedNetworkImage(
+            placeholder: Container(
+              color: Colors.black12,
+            ),
+            imageUrl: widget.place.pictures[0],
+            fit: BoxFit.cover,
           ),
-          imageUrl: widget.place.pictures[0],
-          fit: BoxFit.cover,
         ),
       ),
-      title: Text(widget.place.title),
+      title:Hero(
+        tag: 'title_${widget.place.numid}',
+          child: Text(
+            widget.place.title,
+            style: Theme.of(context).textTheme.subhead,
+          ),
+        ),
       subtitle: Text(widget.place.city),
-      trailing: IconButton(
-        icon: Icon(isFavorite ? Icons.favorite : Icons.favorite_border),
-        onPressed: () {
-          setState(() {
-            isFavorite = !isFavorite;
-          });
-        },
-      ),
-      onTap: () => Navigator.of(context).push(
-            MaterialPageRoute(
+        trailing: IconButton(
+          icon: Icon(isFavorite ? Icons.favorite : Icons.favorite_border),
+          onPressed: () {
+            setState(() {
+              isFavorite = !isFavorite;
+            });
+          },
+        ),
+        onTap: () => Navigator.of(context).push(
+              MaterialPageRoute(
               builder: (context) => PlaceDetailPage(
                     place: widget.place,
                   ),
