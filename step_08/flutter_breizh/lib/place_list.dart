@@ -1,6 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_breizh/data/place.dart';
 
 /// Gets a list of places from data-tourisme API.
@@ -78,9 +78,7 @@ class _PlaceTile extends StatelessWidget {
         width: 100,
         height: 56,
         child: CachedNetworkImage(
-          placeholder: Container(
-            color: Colors.black12,
-          ),
+          placeholder: (context, url) => Container(color: Colors.black12),
           imageUrl: place.pictures[0],
           fit: BoxFit.cover,
         ),

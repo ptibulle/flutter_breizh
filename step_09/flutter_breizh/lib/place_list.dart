@@ -1,16 +1,16 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
-import 'package:http/http.dart' as http;
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_breizh/data/place.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 /// Gets a list of places from data-tourisme API.
 Future<List<Place>> getPlaces() async {
   String json;
-  final response = await http.get(
-      "http://www.data-tourisme-bretagne.com/dataserver/tourismebretagne/data/patnaturelBREfr?\$format=json&\$top=1000");
+  final response = await http.get("https://api.myjson.com/bins/ybkmk");
   if (response.statusCode == 200) {
-    json = response.body;
+    json = utf8.decode(response.bodyBytes);
   } else {
     json = await rootBundle.loadString('assets/places.json');
   }
@@ -85,9 +85,9 @@ class _PlaceTile extends StatelessWidget {
         width: 100,
         height: 56,
         child: CachedNetworkImage(
-          placeholder: Container(
-            color: Colors.black12,
-          ),
+          placeholder: (context, url) => Container(
+                color: Colors.black12,
+              ),
           imageUrl: place.pictures[0],
           fit: BoxFit.cover,
         ),

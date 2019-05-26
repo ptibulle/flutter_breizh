@@ -34,7 +34,7 @@ class PlaceDetailPage extends StatelessWidget {
                   Hero(
                     tag: 'image_${place.numid}',
                     child: CachedNetworkImage(
-                      placeholder: Container(
+                      placeholder: (context, url) => Container(
                         color: Colors.black12,
                       ),
                       imageUrl: place.pictures[0],
@@ -79,7 +79,7 @@ class PlaceDetailPage extends StatelessWidget {
                 AspectRatio(
                   aspectRatio: 1,
                   child: CachedNetworkImage(
-                    placeholder: Container(
+                    placeholder: (context, url) => Container(
                       color: Colors.black12,
                     ),
                     imageUrl:
@@ -111,7 +111,7 @@ class PlaceDetailPage extends StatelessWidget {
               children: place.pictures
                   .skip(1)
                   .map((picture) => CachedNetworkImage(
-                        placeholder: Container(
+                        placeholder: (context, url) => Container(
                           color: Colors.black12,
                         ),
                         imageUrl: picture,

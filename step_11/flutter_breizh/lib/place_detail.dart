@@ -27,7 +27,7 @@ class PlaceDetailPage extends StatelessWidget {
         itemBuilder: (BuildContext _context, int i) {
           if (i == 0) { // Image Principale
             return CachedNetworkImage(
-              placeholder: Container(
+              placeholder: (context, url) => Container(
                 color: Colors.black12,
               ),
               imageUrl: place.pictures[0],
@@ -45,7 +45,7 @@ class PlaceDetailPage extends StatelessWidget {
             return Padding(
               padding: const EdgeInsets.only(top: 16),
               child: CachedNetworkImage(
-                      placeholder: Container(
+                      placeholder: (context, url) => Container(
                         color: Colors.black12,
                       ),
                       imageUrl: place.pictures[i-1],

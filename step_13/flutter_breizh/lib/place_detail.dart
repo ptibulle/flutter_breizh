@@ -67,7 +67,7 @@ class PlaceDetailPage extends StatelessWidget {
               children: place.pictures
                   .skip(1)
                   .map((picture) => CachedNetworkImage(
-                placeholder: Container(
+                placeholder: (context, url) => Container(
                   color: Colors.black12,
                 ),
                 imageUrl: picture,
